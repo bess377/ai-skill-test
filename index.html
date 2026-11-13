@@ -1,0 +1,1525 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 天赋测试 - 测出你最适合的 AI 技能方向</title>
+    <style id="theme-vars">
+/* ============================================================
+   AI Skill Test - Design Tokens
+   Brand prefix: ai
+   Tone: modern, tech-forward, energetic
+   ============================================================ */
+
+:root {
+  --ai-primary: #6366f1;
+  --ai-primary-foreground: #ffffff;
+  --ai-primary-light: #818cf8;
+  --ai-primary-dark: #4f46e5;
+
+  --ai-background: #f8fafc;
+  --ai-foreground: #0f172a;
+  --ai-card: #ffffff;
+  --ai-card-foreground: #0f172a;
+
+  --ai-popover: #ffffff;
+  --ai-popover-foreground: #0f172a;
+
+  --ai-muted: #f1f5f9;
+  --ai-muted-foreground: #64748b;
+
+  --ai-border: #e2e8f0;
+  --ai-input: #e2e8f0;
+  --ai-ring: #6366f1;
+
+  --ai-accent-creative: #ec4899;
+  --ai-accent-writing: #f59e0b;
+  --ai-accent-logic: #6366f1;
+  --ai-accent-doing: #10b981;
+  --ai-accent-business: #ef4444;
+  --ai-accent-study: #8b5cf6;
+
+  --ai-radius-sm: 0.375rem;
+  --ai-radius-md: 0.75rem;
+  --ai-radius-lg: 1.25rem;
+  --ai-radius-xl: 1.75rem;
+
+  --ai-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --ai-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --ai-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --ai-shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --ai-shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+
+  --ai-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans SC', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--ai-font-sans);
+  background: var(--ai-background);
+  color: var(--ai-foreground);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.ai-gradient-bg {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.ai-gradient-text {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.ai-card {
+  background: var(--ai-card);
+  border-radius: var(--ai-radius-lg);
+  box-shadow: var(--ai-shadow-md);
+  border: 1px solid var(--ai-border);
+}
+
+.ai-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  border-radius: var(--ai-radius-md);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+}
+
+.ai-btn-primary {
+  background: var(--ai-primary);
+  color: var(--ai-primary-foreground);
+}
+
+.ai-btn-primary:hover {
+  background: var(--ai-primary-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--ai-shadow-lg);
+}
+
+.ai-btn-outline {
+  background: transparent;
+  color: var(--ai-primary);
+  border: 2px solid var(--ai-primary);
+}
+
+.ai-btn-outline:hover {
+  background: var(--ai-primary);
+  color: var(--ai-primary-foreground);
+}
+
+.ai-progress-bar {
+  height: 8px;
+  background: var(--ai-muted);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.ai-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  border-radius: 9999px;
+  transition: width 0.4s ease;
+}
+
+@keyframes ai-fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes ai-slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes ai-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+@keyframes ai-bounce-in {
+  0% { opacity: 0; transform: scale(0.8); }
+  50% { transform: scale(1.05); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes ai-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes ai-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(99, 102, 241, 0.6); }
+}
+
+@keyframes ai-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.ai-animate-fadeIn {
+  animation: ai-fadeIn 0.5s ease forwards;
+}
+
+.ai-animate-slideUp {
+  animation: ai-slideUp 0.6s ease forwards;
+}
+
+.ai-animate-pulse {
+  animation: ai-pulse 2s ease-in-out infinite;
+}
+
+@keyframes ai-pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4); }
+  70% { box-shadow: 0 0 0 12px rgba(99, 102, 241, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0); }
+}
+
+.ai-btn-pulse {
+  animation: ai-pulse-ring 2s infinite;
+}
+
+.ai-animate-bounce-in {
+  animation: ai-bounce-in 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+.ai-animate-float {
+  animation: ai-float 3s ease-in-out infinite;
+}
+
+.ai-animate-glow {
+  animation: ai-glow 2s ease-in-out infinite;
+}
+
+/* ========== Result Type Color System ========== */
+/* Each type has a full palette controlled by data-type on body */
+
+:root {
+  --type-color: #6366f1;
+  --type-color-light: #eef2ff;
+  --type-color-lighter: #f5f3ff;
+  --type-color-dark: #4f46e5;
+  --type-gradient-from: #667eea;
+  --type-gradient-to: #764ba2;
+  --type-glow: rgba(99, 102, 241, 0.15);
+}
+
+body[data-type="creative"] {
+  --type-color: #ec4899;
+  --type-color-light: #fdf2f8;
+  --type-color-lighter: #fce7f3;
+  --type-color-dark: #db2777;
+  --type-gradient-from: #f472b6;
+  --type-gradient-to: #ec4899;
+  --type-glow: rgba(236, 72, 153, 0.15);
+}
+
+body[data-type="writing"] {
+  --type-color: #f59e0b;
+  --type-color-light: #fffbeb;
+  --type-color-lighter: #fef3c7;
+  --type-color-dark: #d97706;
+  --type-gradient-from: #fbbf24;
+  --type-gradient-to: #f59e0b;
+  --type-glow: rgba(245, 158, 11, 0.15);
+}
+
+body[data-type="logic"] {
+  --type-color: #6366f1;
+  --type-color-light: #eef2ff;
+  --type-color-lighter: #e0e7ff;
+  --type-color-dark: #4f46e5;
+  --type-gradient-from: #818cf8;
+  --type-gradient-to: #6366f1;
+  --type-glow: rgba(99, 102, 241, 0.15);
+}
+
+body[data-type="doing"] {
+  --type-color: #10b981;
+  --type-color-light: #ecfdf5;
+  --type-color-lighter: #d1fae5;
+  --type-color-dark: #059669;
+  --type-gradient-from: #34d399;
+  --type-gradient-to: #10b981;
+  --type-glow: rgba(16, 185, 129, 0.15);
+}
+
+body[data-type="business"] {
+  --type-color: #ef4444;
+  --type-color-light: #fef2f2;
+  --type-color-lighter: #fee2e2;
+  --type-color-dark: #dc2626;
+  --type-gradient-from: #f87171;
+  --type-gradient-to: #ef4444;
+  --type-glow: rgba(239, 68, 68, 0.15);
+}
+
+body[data-type="all"] {
+  --type-color: #8b5cf6;
+  --type-color-light: #f5f3ff;
+  --type-color-lighter: #ede9fe;
+  --type-color-dark: #7c3aed;
+  --type-gradient-from: #a78bfa;
+  --type-gradient-to: #8b5cf6;
+  --type-glow: rgba(139, 92, 246, 0.15);
+}
+
+/* Type-aware utility styles */
+.type-badge {
+  background-color: var(--type-color-light);
+  color: var(--type-color);
+}
+
+.type-gradient-text {
+  background: linear-gradient(135deg, var(--type-gradient-from), var(--type-gradient-to));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.type-gradient-bg {
+  background: linear-gradient(135deg, var(--type-gradient-from), var(--type-gradient-to));
+}
+
+.type-border {
+  border-color: var(--type-color);
+}
+
+.type-icon-bg {
+  background: linear-gradient(135deg, var(--type-color-light), var(--type-color-lighter));
+  color: var(--type-color);
+}
+
+.screen {
+  display: block;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.screen.hidden {
+  display: none;
+}
+
+.screen.fade-out {
+  opacity: 0;
+}
+
+.option-card {
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.option-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--ai-shadow-lg);
+  border-color: var(--ai-primary);
+}
+
+.option-card:hover .option-letter {
+  background: var(--ai-primary);
+  color: white;
+}
+
+.option-card.selected {
+  border-color: var(--ai-primary);
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(118, 75, 162, 0.05));
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+.option-card.selected .option-letter {
+  background: var(--ai-primary);
+  color: white;
+  transform: scale(1.1);
+}
+
+.option-letter {
+  transition: all 0.2s ease;
+}
+
+.hero-illustration {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(118, 75, 162, 0.1));
+  border-radius: var(--ai-radius-xl);
+  overflow: hidden;
+}
+
+.hero-illustration::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 30% 30%, rgba(99, 102, 241, 0.2) 0%, transparent 50%),
+              radial-gradient(circle at 70% 70%, rgba(118, 75, 162, 0.2) 0%, transparent 50%);
+  animation: ai-float 6s ease-in-out infinite;
+}
+
+.hero-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 80px;
+  filter: drop-shadow(0 4px 12px rgba(99, 102, 241, 0.3));
+}
+
+.feature-card {
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--ai-shadow-lg);
+}
+
+.bar-fill {
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.share-btn {
+  transition: all 0.2s ease;
+}
+
+.share-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* Mobile-first responsive */
+@media (min-width: 768px) {
+  .hero-illustration {
+    height: 280px;
+  }
+  .hero-icon {
+    font-size: 100px;
+  }
+}
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--ai-background);
+    --color-foreground: var(--ai-foreground);
+    --color-card: var(--ai-card);
+    --color-card-foreground: var(--ai-card-foreground);
+    --color-popover: var(--ai-popover);
+    --color-popover-foreground: var(--ai-popover-foreground);
+    --color-primary: var(--ai-primary);
+    --color-primary-foreground: var(--ai-primary-foreground);
+    --color-muted: var(--ai-muted);
+    --color-muted-foreground: var(--ai-muted-foreground);
+    --color-border: var(--ai-border);
+    --color-input: var(--ai-input);
+    --color-ring: var(--ai-ring);
+    --radius-sm: var(--ai-radius-sm);
+    --radius-md: var(--ai-radius-md);
+    --radius-lg: var(--ai-radius-lg);
+    --radius-xl: var(--ai-radius-xl);
+  }
+  @layer base {
+    body { background: var(--ai-background); color: var(--ai-foreground); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style id="semantic-token-fallback">
+      .bg-background { background-color: var(--ai-background); }
+      .text-background { color: var(--ai-background); }
+      .border-background { border-color: var(--ai-background); }
+      .ring-background { --tw-ring-color: var(--ai-background); }
+      .bg-foreground { background-color: var(--ai-foreground); }
+      .text-foreground { color: var(--ai-foreground); }
+      .border-foreground { border-color: var(--ai-foreground); }
+      .ring-foreground { --tw-ring-color: var(--ai-foreground); }
+      .bg-card { background-color: var(--ai-card); }
+      .text-card { color: var(--ai-card); }
+      .border-card { border-color: var(--ai-card); }
+      .ring-card { --tw-ring-color: var(--ai-card); }
+      .bg-card-foreground { background-color: var(--ai-card-foreground); }
+      .text-card-foreground { color: var(--ai-card-foreground); }
+      .border-card-foreground { border-color: var(--ai-card-foreground); }
+      .ring-card-foreground { --tw-ring-color: var(--ai-card-foreground); }
+      .bg-popover { background-color: var(--ai-popover); }
+      .text-popover { color: var(--ai-popover); }
+      .border-popover { border-color: var(--ai-popover); }
+      .ring-popover { --tw-ring-color: var(--ai-popover); }
+      .bg-popover-foreground { background-color: var(--ai-popover-foreground); }
+      .text-popover-foreground { color: var(--ai-popover-foreground); }
+      .border-popover-foreground { border-color: var(--ai-popover-foreground); }
+      .ring-popover-foreground { --tw-ring-color: var(--ai-popover-foreground); }
+      .bg-primary { background-color: var(--ai-primary); }
+      .text-primary { color: var(--ai-primary); }
+      .border-primary { border-color: var(--ai-primary); }
+      .ring-primary { --tw-ring-color: var(--ai-primary); }
+      .bg-primary-foreground { background-color: var(--ai-primary-foreground); }
+      .text-primary-foreground { color: var(--ai-primary-foreground); }
+      .border-primary-foreground { border-color: var(--ai-primary-foreground); }
+      .ring-primary-foreground { --tw-ring-color: var(--ai-primary-foreground); }
+      .bg-muted { background-color: var(--ai-muted); }
+      .text-muted { color: var(--ai-muted); }
+      .border-muted { border-color: var(--ai-muted); }
+      .ring-muted { --tw-ring-color: var(--ai-muted); }
+      .bg-muted-foreground { background-color: var(--ai-muted-foreground); }
+      .text-muted-foreground { color: var(--ai-muted-foreground); }
+      .border-muted-foreground { border-color: var(--ai-muted-foreground); }
+      .ring-muted-foreground { --tw-ring-color: var(--ai-muted-foreground); }
+      .bg-border { background-color: var(--ai-border); }
+      .text-border { color: var(--ai-border); }
+      .border-border { border-color: var(--ai-border); }
+      .ring-border { --tw-ring-color: var(--ai-border); }
+      .bg-input { background-color: var(--ai-input); }
+      .text-input { color: var(--ai-input); }
+      .border-input { border-color: var(--ai-input); }
+      .ring-input { --tw-ring-color: var(--ai-input); }
+      .bg-ring { background-color: var(--ai-ring); }
+      .text-ring { color: var(--ai-ring); }
+      .border-ring { border-color: var(--ai-ring); }
+      .ring-ring { --tw-ring-color: var(--ai-ring); }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body class="min-h-screen font-sans antialiased">
+    <main class="max-w-lg mx-auto px-4 py-6 pb-20">
+
+        <!-- ============ 状态 1：开始页 ============ -->
+        <section id="screen-start" class="screen ai-animate-fadeIn">
+            <!-- Header -->
+            <div class="text-center mb-8">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-50 text-indigo-600 text-sm font-medium mb-4">
+                    <i data-lucide="sparkles" class="w-4 h-4"></i>
+                    <span>AI 天赋测评</span>
+                </div>
+                <h1 class="text-3xl md:text-4xl font-bold mb-3">
+                    <span class="ai-gradient-text">测测你的 AI 天赋</span>
+                </h1>
+                <p class="text-muted-foreground text-base">3 分钟测出你最适合学的 AI 技能方向</p>
+            </div>
+
+            <!-- Hero Illustration -->
+            <div class="hero-illustration mb-8 ai-animate-glow">
+                <div class="hero-icon ai-animate-float">🤖</div>
+                <!-- Decorative elements -->
+                <div class="absolute top-6 left-8 text-3xl opacity-60 ai-animate-float" style="animation-delay: 0.5s;">✨</div>
+                <div class="absolute top-10 right-10 text-2xl opacity-50 ai-animate-float" style="animation-delay: 1s;">💡</div>
+                <div class="absolute bottom-8 left-12 text-2xl opacity-50 ai-animate-float" style="animation-delay: 1.5s;">🎨</div>
+                <div class="absolute bottom-10 right-8 text-3xl opacity-60 ai-animate-float" style="animation-delay: 2s;">🚀</div>
+            </div>
+
+            <!-- Feature Cards: 6 Dimensions -->
+            <h2 class="text-lg font-semibold mb-4 text-center">测试包含 6 大能力维度</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-8">
+                <div class="feature-card ai-card p-4 text-center">
+                    <div class="w-12 h-12 mx-auto mb-2 rounded-xl bg-gradient-to-br from-pink-100 to-rose-100 flex items-center justify-center text-2xl">
+                        🎨
+                    </div>
+                    <div class="font-semibold text-sm">创造力</div>
+                    <div class="text-xs text-muted-foreground">Creative</div>
+                </div>
+                <div class="feature-card ai-card p-4 text-center">
+                    <div class="w-12 h-12 mx-auto mb-2 rounded-xl bg-gradient-to-br from-amber-100 to-orange-100 flex items-center justify-center text-2xl">
+                        ✍️
+                    </div>
+                    <div class="font-semibold text-sm">文字力</div>
+                    <div class="text-xs text-muted-foreground">Writing</div>
+                </div>
+                <div class="feature-card ai-card p-4 text-center">
+                    <div class="w-12 h-12 mx-auto mb-2 rounded-xl bg-gradient-to-br from-indigo-100 to-purple-100 flex items-center justify-center text-2xl">
+                        💻
+                    </div>
+                    <div class="font-semibold text-sm">逻辑力</div>
+                    <div class="text-xs text-muted-foreground">Logic</div>
+                </div>
+                <div class="feature-card ai-card p-4 text-center">
+                    <div class="w-12 h-12 mx-auto mb-2 rounded-xl bg-gradient-to-br from-emerald-100 to-teal-100 flex items-center justify-center text-2xl">
+                        ⚙️
+                    </div>
+                    <div class="font-semibold text-sm">动手力</div>
+                    <div class="text-xs text-muted-foreground">Doing</div>
+                </div>
+                <div class="feature-card ai-card p-4 text-center">
+                    <div class="w-12 h-12 mx-auto mb-2 rounded-xl bg-gradient-to-br from-red-100 to-orange-100 flex items-center justify-center text-2xl">
+                        💰
+                    </div>
+                    <div class="font-semibold text-sm">商业力</div>
+                    <div class="text-xs text-muted-foreground">Business</div>
+                </div>
+                <div class="feature-card ai-card p-4 text-center">
+                    <div class="w-12 h-12 mx-auto mb-2 rounded-xl bg-gradient-to-br from-violet-100 to-purple-100 flex items-center justify-center text-2xl">
+                        📚
+                    </div>
+                    <div class="font-semibold text-sm">学习力</div>
+                    <div class="text-xs text-muted-foreground">Study</div>
+                </div>
+            </div>
+
+            <!-- CTA Button -->
+            <button id="btn-start" data-dom-id="btn-start" class="w-full py-4 px-6 text-lg font-bold text-white rounded-2xl ai-gradient-bg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 ai-btn-primary ai-btn-pulse">
+                开始测试
+            </button>
+
+            <p class="text-center text-sm text-muted-foreground mt-4">
+                20 道题 · 约 3 分钟 · 完全免费
+            </p>
+        </section>
+
+        <!-- ============ 状态 2：答题页 ============ -->
+        <section id="screen-quiz" class="screen hidden">
+            <!-- Progress Bar -->
+            <div class="mb-6">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-sm font-medium text-muted-foreground">
+                        第 <span id="current-num" class="text-primary font-bold">1</span> / 20 题
+                    </span>
+                    <span id="progress-percent" class="text-sm font-medium text-primary">5%</span>
+                </div>
+                <div class="ai-progress-bar">
+                    <div id="progress-fill" class="ai-progress-fill" style="width: 5%"></div>
+                </div>
+            </div>
+
+            <!-- Question -->
+            <div id="question-container" class="mb-8">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 text-indigo-600 text-sm font-medium mb-4">
+                    <i data-lucide="help-circle" class="w-4 h-4"></i>
+                    <span id="question-badge">题目</span>
+                </div>
+                <h2 id="question-text" class="text-xl md:text-2xl font-bold leading-relaxed">
+                    题目内容
+                </h2>
+            </div>
+
+            <!-- Options -->
+            <div id="options-container" class="space-y-3 mb-8">
+                <!-- Options will be dynamically inserted -->
+            </div>
+
+            <!-- Bottom Actions -->
+            <div class="flex items-center justify-between">
+                <button id="btn-prev" data-dom-id="btn-prev" class="flex items-center gap-2 px-4 py-2 text-muted-foreground hover:text-primary transition-colors">
+                    <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                    <span>上一题</span>
+                </button>
+                <div class="flex gap-1">
+                    <div id="progress-dots" class="flex gap-1">
+                        <!-- Dots will be generated -->
+                    </div>
+                </div>
+                <div class="w-20"></div>
+            </div>
+        </section>
+
+        <!-- ============ 状态 3：结果页 ============ -->
+        <section id="screen-result" class="screen hidden">
+            <!-- Result Header -->
+            <div class="text-center mb-8">
+                <div id="result-emoji" class="text-7xl mb-4 ai-animate-bounce-in">🎨</div>
+                <div id="result-type-label" class="inline-flex items-center gap-2 px-4 py-2 rounded-full type-badge text-sm font-bold mb-3">
+                    <i data-lucide="award" class="w-4 h-4"></i>
+                    <span>AI 创意设计师</span>
+                </div>
+                <h2 class="text-2xl md:text-3xl font-bold mb-2">
+                    你是：<span id="result-title" class="type-gradient-text">AI 创意设计师</span>
+                </h2>
+                <p id="result-subtitle" class="text-muted-foreground">创造力爆棚的视觉艺术家</p>
+            </div>
+
+            <!-- Ability Chart -->
+            <div class="ai-card p-5 mb-6">
+                <h3 class="font-bold text-lg mb-4 flex items-center gap-2">
+                    <i data-lucide="bar-chart-3" class="w-5 h-5" style="color: var(--type-color);"></i>
+                    六维能力分析
+                </h3>
+                <div id="ability-bars" class="space-y-3">
+                    <!-- Ability bars will be dynamically inserted -->
+                </div>
+            </div>
+
+            <!-- Description -->
+            <div class="ai-card p-5 mb-6">
+                <h3 class="font-bold text-lg mb-3 flex items-center gap-2">
+                    <i data-lucide="user-check" class="w-5 h-5" style="color: var(--type-color);"></i>
+                    为什么你适合这个方向
+                </h3>
+                <p id="result-description" class="text-muted-foreground text-sm leading-relaxed mb-4">
+                    描述内容
+                </p>
+                <ul id="result-reasons" class="space-y-2">
+                    <!-- Reasons will be dynamically inserted -->
+                </ul>
+            </div>
+
+            <!-- Learning Path -->
+            <div class="ai-card p-5 mb-6">
+                <h3 class="font-bold text-lg mb-4 flex items-center gap-2">
+                    <i data-lucide="map" class="w-5 h-5" style="color: var(--type-color);"></i>
+                    推荐学习路径
+                </h3>
+                <div id="learning-path" class="space-y-4">
+                    <!-- Path items will be dynamically inserted -->
+                </div>
+            </div>
+
+            <!-- Tools -->
+            <div class="ai-card p-5 mb-6">
+                <h3 class="font-bold text-lg mb-4 flex items-center gap-2">
+                    <i data-lucide="wrench" class="w-5 h-5" style="color: var(--type-color);"></i>
+                    推荐工具清单
+                </h3>
+                <div id="tools-list" class="space-y-3">
+                    <!-- Tools will be dynamically inserted -->
+                </div>
+            </div>
+
+            <!-- Tips -->
+            <div class="ai-card p-5 mb-6">
+                <h3 class="font-bold text-lg mb-4 flex items-center gap-2">
+                    <i data-lucide="alert-triangle" class="w-5 h-5 text-amber-500"></i>
+                    避坑指南
+                </h3>
+                <ul id="tips-list" class="space-y-3">
+                    <!-- Tips will be dynamically inserted -->
+                </ul>
+            </div>
+
+            <!-- CTA Buttons -->
+            <div class="flex gap-3 mb-6">
+                <button id="btn-restart" data-dom-id="btn-restart" class="flex-1 py-3 px-4 font-bold text-white rounded-xl type-gradient-bg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300">
+                    再测一次
+                </button>
+                <button id="btn-share" data-dom-id="btn-share" class="flex-1 py-3 px-4 font-bold rounded-xl border-2 bg-white transition-all duration-300 flex items-center justify-center gap-2" style="color: var(--type-color); border-color: var(--type-color);">
+                    分享给朋友
+                </button>
+            </div>
+
+            <!-- Upgrade Block -->
+            <div id="upgrade-block" class="rounded-2xl p-6 text-white text-center relative overflow-hidden type-gradient-bg">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+                <div class="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full translate-y-1/2 -translate-x-1/2"></div>
+                <div class="relative z-10">
+                    <div class="text-4xl mb-3">🎁</div>
+                    <h3 class="text-lg font-bold mb-2">想要完整报告和定制学习方案？</h3>
+                    <p class="text-white/80 text-sm mb-4">扫码关注，获取你的专属 AI 成长计划</p>
+                    <div class="w-28 h-28 mx-auto bg-white rounded-xl flex items-center justify-center text-gray-400 text-xs mb-3">
+                        二维码占位
+                    </div>
+                    <p class="text-white/70 text-xs">长按识别 · 免费领取</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+    // ============ 题目数据 ============
+    const questions = [
+      {
+        q: "如果让你用 AI 做一个作品，你最想做什么？",
+        options: [
+          { text: "一幅精美的 AI 绘画作品", scores: { C:3, W:1, L:0, D:1, B:0, S:1 } },
+          { text: "一篇爆款 AI 文案/故事", scores: { C:1, W:3, L:0, D:1, B:1, S:1 } },
+          { text: "一个实用的 AI 小工具/小程序", scores: { C:1, W:0, L:3, D:2, B:1, S:2 } },
+          { text: "一套能赚钱的 AI 副业方案", scores: { C:2, W:1, L:1, D:1, B:3, S:1 } }
+        ]
+      },
+      {
+        q: "你平时写东西的频率是？",
+        options: [
+          { text: "经常发朋友圈/小红书，喜欢写文案", scores: { C:2, W:3, L:0, D:1, B:2, S:1 } },
+          { text: "偶尔写，需要的时候能写出来", scores: { C:1, W:2, L:1, D:1, B:1, S:1 } },
+          { text: "很少写，觉得写东西很痛苦", scores: { C:0, W:0, L:1, D:1, B:0, S:0 } },
+          { text: "喜欢写代码/做表格，不喜欢写文字", scores: { C:0, W:0, L:3, D:2, B:0, S:2 } }
+        ]
+      },
+      {
+        q: "你更擅长以下哪种思维方式？",
+        options: [
+          { text: "发散思维，脑洞大，想法多", scores: { C:3, W:2, L:0, D:0, B:1, S:1 } },
+          { text: "归纳总结，擅长提炼观点", scores: { C:1, W:3, L:1, D:0, B:1, S:2 } },
+          { text: "逻辑推理，喜欢找规律解谜题", scores: { C:0, W:1, L:3, D:1, B:1, S:2 } },
+          { text: "结果导向，直奔主题", scores: { C:0, W:1, L:2, D:2, B:2, S:1 } }
+        ]
+      },
+      {
+        q: "遇到一个新工具/新软件，你通常怎么学？",
+        options: [
+          { text: "直接上手摸索，边做边学", scores: { C:1, W:0, L:1, D:3, B:1, S:2 } },
+          { text: "先看完整教程，再动手", scores: { C:0, W:1, L:2, D:1, B:0, S:3 } },
+          { text: "找人教我，自己懒得研究", scores: { C:0, W:1, L:0, D:0, B:1, S:0 } },
+          { text: "看情况，简单的自己学，难的就算了", scores: { C:1, W:1, L:1, D:2, B:0, S:1 } }
+        ]
+      },
+      {
+        q: "学 AI 你最想达到什么目的？",
+        options: [
+          { text: "纯兴趣，觉得好玩有创造力", scores: { C:3, W:1, L:1, D:1, B:0, S:2 } },
+          { text: "提升工作效率，早点下班", scores: { C:0, W:1, L:1, D:3, B:1, S:2 } },
+          { text: "用 AI 赚钱/搞副业", scores: { C:1, W:1, L:1, D:1, B:3, S:2 } },
+          { text: "大家都在学，我也不能落后", scores: { C:0, W:0, L:1, D:1, B:1, S:3 } }
+        ]
+      },
+      {
+        q: "你愿意花多少时间学一个新技能？",
+        options: [
+          { text: "每天 1 小时以上，深度学习", scores: { C:2, W:1, L:2, D:1, B:1, S:3 } },
+          { text: "每周 3-5 小时，系统学习", scores: { C:1, W:1, L:2, D:2, B:1, S:3 } },
+          { text: "周末有空学学，随缘", scores: { C:1, W:1, L:0, D:1, B:0, S:1 } },
+          { text: "越简单越好，最好几分钟上手", scores: { C:1, W:0, L:0, D:2, B:2, S:0 } }
+        ]
+      },
+      {
+        q: "以下哪种工作状态让你最有成就感？",
+        options: [
+          { text: "创作出让人惊艳的作品", scores: { C:3, W:1, L:0, D:0, B:1, S:1 } },
+          { text: "写出一篇爆款文章/文案", scores: { C:1, W:3, L:0, D:0, B:2, S:1 } },
+          { text: "解决了一个复杂的技术难题", scores: { C:0, W:0, L:3, D:2, B:0, S:2 } },
+          { text: "用一个方法赚到了第一笔钱", scores: { C:1, W:1, L:1, D:1, B:3, S:1 } }
+        ]
+      },
+      {
+        q: "你平时刷手机，最喜欢看什么内容？",
+        options: [
+          { text: "设计/绘画/美学类内容", scores: { C:3, W:0, L:0, D:1, B:0, S:1 } },
+          { text: "故事/文案/知识类内容", scores: { C:1, W:3, L:0, D:0, B:1, S:2 } },
+          { text: "科技/数码/编程类内容", scores: { C:1, W:0, L:3, D:1, B:1, S:2 } },
+          { text: "赚钱/副业/商业类内容", scores: { C:1, W:1, L:0, D:1, B:3, S:1 } }
+        ]
+      },
+      {
+        q: "如果要做一个副业，你倾向于做什么类型？",
+        options: [
+          { text: "设计类，靠审美和创意", scores: { C:3, W:1, L:0, D:1, B:1, S:0 } },
+          { text: "内容类，靠写作和表达", scores: { C:1, W:3, L:0, D:0, B:2, S:1 } },
+          { text: "技术类，靠技能和能力", scores: { C:0, W:0, L:3, D:2, B:1, S:2 } },
+          { text: "运营类，靠资源和整合", scores: { C:1, W:1, L:1, D:2, B:3, S:1 } }
+        ]
+      },
+      {
+        q: "你对「审美」的自我评价是？",
+        options: [
+          { text: "很强，朋友都说我品味好", scores: { C:3, W:1, L:0, D:1, B:1, S:0 } },
+          { text: "还可以，能分辨美丑", scores: { C:2, W:1, L:1, D:1, B:1, S:1 } },
+          { text: "一般，不太关注这些", scores: { C:1, W:1, L:1, D:1, B:1, S:1 } },
+          { text: "比较直男/直女审美", scores: { C:0, W:0, L:1, D:1, B:0, S:0 } }
+        ]
+      },
+      {
+        q: "你对「写作」的态度是？",
+        options: [
+          { text: "很喜欢，经常写东西", scores: { C:1, W:3, L:0, D:0, B:1, S:2 } },
+          { text: "还行，逼自己一下能写", scores: { C:1, W:2, L:1, D:1, B:1, S:1 } },
+          { text: "不喜欢，但必要时能写", scores: { C:0, W:1, L:1, D:1, B:0, S:1 } },
+          { text: "能说就不说，能发图就不写字", scores: { C:2, W:0, L:0, D:1, B:1, S:0 } }
+        ]
+      },
+      {
+        q: "你对「编程/代码」的态度是？",
+        options: [
+          { text: "很感兴趣，想学但没入门", scores: { C:1, W:0, L:3, D:2, B:1, S:2 } },
+          { text: "有点兴趣，但觉得很难", scores: { C:0, W:0, L:2, D:1, B:0, S:1 } },
+          { text: "不感兴趣，觉得跟自己无关", scores: { C:0, W:1, L:0, D:0, B:0, S:0 } },
+          { text: "已经会一些了", scores: { C:1, W:1, L:3, D:2, B:1, S:2 } }
+        ]
+      },
+      {
+        q: "你对「赚钱」的态度是？",
+        options: [
+          { text: "很想赚钱，天天琢磨怎么搞钱", scores: { C:1, W:1, L:1, D:1, B:3, S:2 } },
+          { text: "有兴趣，但不知道从哪下手", scores: { C:1, W:1, L:1, D:1, B:2, S:2 } },
+          { text: "顺其自然，有钱更好没钱也行", scores: { C:0, W:1, L:1, D:1, B:1, S:1 } },
+          { text: "钱不重要，做自己喜欢的事就好", scores: { C:2, W:1, L:1, D:0, B:0, S:1 } }
+        ]
+      },
+      {
+        q: "以下哪个描述最像你？",
+        options: [
+          { text: "想法很多，但经常三分钟热度", scores: { C:3, W:1, L:0, D:0, B:1, S:0 } },
+          { text: "表达能力强，朋友都爱听我说话", scores: { C:1, W:3, L:0, D:1, B:2, S:1 } },
+          { text: "做事有条理，喜欢按计划来", scores: { C:0, W:1, L:3, D:2, B:1, S:2 } },
+          { text: "执行力强，说干就干", scores: { C:1, W:1, L:1, D:3, B:2, S:1 } }
+        ]
+      },
+      {
+        q: "你学习新东西的方式是？",
+        options: [
+          { text: "先看有没有现成模板，照着改", scores: { C:2, W:1, L:1, D:3, B:1, S:1 } },
+          { text: "系统学一遍理论，再开始实践", scores: { C:0, W:1, L:2, D:1, B:0, S:3 } },
+          { text: "先做起来，遇到问题再查", scores: { C:1, W:0, L:1, D:3, B:1, S:2 } },
+          { text: "找别人做好的，直接抄作业", scores: { C:1, W:1, L:0, D:2, B:2, S:0 } }
+        ]
+      },
+      {
+        q: "如果有一个 AI 项目让你做，你最想负责哪个环节？",
+        options: [
+          { text: "视觉设计，负责好不好看", scores: { C:3, W:0, L:0, D:1, B:1, S:0 } },
+          { text: "内容策划，负责写什么", scores: { C:1, W:3, L:0, D:0, B:2, S:1 } },
+          { text: "技术实现，负责能不能用", scores: { C:0, W:0, L:3, D:2, B:0, S:2 } },
+          { text: "运营推广，负责能不能赚钱", scores: { C:1, W:2, L:0, D:1, B:3, S:1 } }
+        ]
+      },
+      {
+        q: "你觉得自己最大的优势是？",
+        options: [
+          { text: "创意多，想法跟别人不一样", scores: { C:3, W:1, L:0, D:0, B:1, S:0 } },
+          { text: "会说话，人缘好，情商高", scores: { C:1, W:3, L:0, D:1, B:2, S:1 } },
+          { text: "学习能力强，什么都能学会", scores: { C:1, W:1, L:2, D:1, B:1, S:3 } },
+          { text: "执行力强，想做的事一定做成", scores: { C:1, W:1, L:1, D:3, B:2, S:1 } }
+        ]
+      },
+      {
+        q: "你刷小红书/抖音时，最容易被什么内容种草？",
+        options: [
+          { text: "好看的图片/视频/设计", scores: { C:3, W:0, L:0, D:1, B:0, S:0 } },
+          { text: "有共鸣的文案/故事/观点", scores: { C:1, W:3, L:0, D:0, B:1, S:1 } },
+          { text: "干货教程/知识科普", scores: { C:0, W:1, L:2, D:1, B:0, S:3 } },
+          { text: "赚钱方法/副业项目", scores: { C:1, W:1, L:0, D:1, B:3, S:1 } }
+        ]
+      },
+      {
+        q: "面对一个复杂问题，你的第一反应是？",
+        options: [
+          { text: "换个角度，想出一个新解法", scores: { C:3, W:1, L:1, D:0, B:1, S:1 } },
+          { text: "查资料，看看别人怎么解决", scores: { C:0, W:1, L:2, D:1, B:0, S:3 } },
+          { text: "拆解问题，一步一步解决", scores: { C:0, W:1, L:3, D:2, B:1, S:2 } },
+          { text: "先试试看，不行再调整", scores: { C:1, W:0, L:1, D:3, B:2, S:1 } }
+        ]
+      },
+      {
+        q: "一年后，你希望自己在 AI 领域达到什么状态？",
+        options: [
+          { text: "能用 AI 做出专业级的创意作品", scores: { C:3, W:1, L:1, D:1, B:0, S:2 } },
+          { text: "能用 AI 写出高质量的内容，做个小博主", scores: { C:1, W:3, L:0, D:1, B:2, S:2 } },
+          { text: "能用 AI 编程/做工具，成为技术达人", scores: { C:0, W:0, L:3, D:2, B:1, S:3 } },
+          { text: "能用 AI 赚到钱，有稳定的副业收入", scores: { C:1, W:2, L:1, D:2, B:3, S:2 } }
+        ]
+      }
+    ];
+
+    // ============ 结果类型数据 ============
+    const resultTypes = {
+      creative: {
+        type: "creative",
+        emoji: "🎨",
+        title: "AI 创意设计师",
+        subtitle: "创造力爆棚的视觉艺术家",
+        color: "#ec4899",
+        bgGradient: "from-pink-500 to-rose-500",
+        description: "你是一个天生的视觉创造者，对美有独特的感知力。你喜欢用图像表达想法，对色彩、构图、风格有自己的坚持。在 AI 时代，你的审美和创意是最珍贵的资产。",
+        reasons: [
+          "审美是你的护城河：AI 绘画工具人人都能用，但不是人人都能做出好看的图",
+          "创意是 AI 的天花板：AI 只是工具，Prompt 写得好不好靠的是人的创意判断",
+          "市场需求大：电商、自媒体、广告等行业都需要大量 AI 视觉内容"
+        ],
+        path: [
+          { phase: "入门期（第1月）", desc: "掌握 Midjourney/即梦 AI 基础用法，学习 Prompt 结构，每天练习生成 10 张图" },
+          { phase: "进阶期（第2-3月）", desc: "学习风格控制、一致性控制、局部重绘，接触 AI 视频工具" },
+          { phase: "变现期（第4-6月）", desc: "接单变现（头像、海报、电商图），做自媒体账号展示作品引流" }
+        ],
+        tools: [
+          { name: "Midjourney", difficulty: "★★☆☆☆", rating: "⭐⭐⭐⭐⭐" },
+          { name: "即梦 AI", difficulty: "★☆☆☆☆", rating: "⭐⭐⭐⭐⭐" },
+          { name: "Stable Diffusion", difficulty: "★★★★☆", rating: "⭐⭐⭐⭐" },
+          { name: "可灵 AI 视频", difficulty: "★★☆☆☆", rating: "⭐⭐⭐⭐" },
+          { name: "Canva AI", difficulty: "★☆☆☆☆", rating: "⭐⭐⭐⭐" }
+        ],
+        tips: [
+          "不要沉迷调参数而忽略审美，审美和创意才是核心竞争力",
+          "不要只存图不练习，收藏 1000 个教程不如动手生成 100 张图",
+          "注意版权问题，商用时尽量用有明确授权的工具"
+        ]
+      },
+      writing: {
+        type: "writing",
+        emoji: "✍️",
+        title: "AI 内容创作者",
+        subtitle: "用文字撬动世界的表达者",
+        color: "#f59e0b",
+        bgGradient: "from-amber-500 to-orange-500",
+        description: "你天生擅长用文字表达，喜欢讲故事、写观点、分享知识。在 AI 时代，会写作 + 会用 AI 写作工具的人，效率可以提升 10 倍。你可以用 AI 帮你写文案、写故事、做内容。",
+        reasons: [
+          "内容是 AI 时代的硬通货：好内容永远有流量，AI 让内容生产效率大大提升",
+          "你的文字功底是 AI 替代不了的：AI 可以写文字，但写不出有灵魂的内容",
+          "变现路径清晰：自媒体、文案代写、小说、知识付费……方式很多"
+        ],
+        path: [
+          { phase: "入门期（第1月）", desc: "掌握 ChatGPT/豆包基础用法，学习写 Prompt 的核心技巧" },
+          { phase: "进阶期（第2-3月）", desc: "学习不同平台的内容玩法，建立自己的内容选题库和写作 SOP" },
+          { phase: "变现期（第4-6月）", desc: "接单变现（文案代写、脚本撰写），做自己的自媒体账号" }
+        ],
+        tools: [
+          { name: "ChatGPT", difficulty: "★★☆☆☆", rating: "⭐⭐⭐⭐⭐" },
+          { name: "豆包", difficulty: "★☆☆☆☆", rating: "⭐⭐⭐⭐⭐" },
+          { name: "Claude", difficulty: "★★☆☆☆", rating: "⭐⭐⭐⭐" },
+          { name: "WPS AI", difficulty: "★☆☆☆☆", rating: "⭐⭐⭐⭐" },
+          { name: "秘塔写作猫", difficulty: "★☆☆☆☆", rating: "⭐⭐⭐" }
+        ],
+        tips: [
+          "不要完全依赖 AI，一定要加入自己的观点和风格，AI 是助手不是替代品",
+          "不要只写不发，写得再多发出去才有反馈，先完成再完美",
+          "注意内容真实性，AI 可能会编造事实，涉及数据的内容一定要核实"
+        ]
+      },
+      logic: {
+        type: "logic",
+        emoji: "💻",
+        title: "AI 技术极客",
+        subtitle: "用代码改变世界的技术达人",
+        color: "#6366f1",
+        bgGradient: "from-indigo-500 to-purple-500",
+        description: "你喜欢钻研技术，享受解决问题的快感。你对编程感兴趣，喜欢折腾各种工具。在 AI 时代，懂技术的人会有巨大的优势——你不仅会用 AI，还能理解 AI 背后的原理。",
+        reasons: [
+          "技术是 AI 时代的硬实力：会用 AI 工具的人很多，但懂技术的人很少",
+          "天花板最高：从 Prompt 工程师到 AI 应用开发到 AI 创业，上升空间最大",
+          "薪资水平高：AI 相关技术岗位薪资普遍比传统岗位高 30%-50%"
+        ],
+        path: [
+          { phase: "入门期（第1月）", desc: "掌握 AI 工具高级用法，学习 Python 基础，了解 AI 基本概念" },
+          { phase: "进阶期（第2-4月）", desc: "学习 LangChain 等开发框架，动手做 2-3 个 AI 小项目" },
+          { phase: "变现期（第5-8月）", desc: "接单变现（AI 应用定制开发），做技术自媒体，开发自己的 AI 产品" }
+        ],
+        tools: [
+          { name: "Cursor", difficulty: "★★☆☆☆", rating: "⭐⭐⭐⭐⭐" },
+          { name: "GitHub Copilot", difficulty: "★★★☆☆", rating: "⭐⭐⭐⭐⭐" },
+          { name: "LangChain", difficulty: "★★★★☆", rating: "⭐⭐⭐⭐⭐" },
+          { name: "Coze 扣子", difficulty: "★★☆☆☆", rating: "⭐⭐⭐⭐⭐" },
+          { name: "Dify", difficulty: "★★☆☆☆", rating: "⭐⭐⭐⭐" }
+        ],
+        tips: [
+          "不要陷入学不完的焦虑，选一个方向深耕比浅尝辄止强",
+          "不要只学不做，编程是练出来的不是看出来的",
+          "不要忽视业务理解，能解决实际问题的技术才有价值"
+        ]
+      },
+      doing: {
+        type: "doing",
+        emoji: "⚙️",
+        title: "AI 效率达人",
+        subtitle: "用工具提升效率的实干家",
+        color: "#10b981",
+        bgGradient: "from-emerald-500 to-teal-500",
+        description: "你是一个务实的行动派，喜欢用工具解决实际问题。你不追求花里胡哨的技术，但追求效率和结果。你能把 AI 工具用在刀刃上，实实在在地提升效率、节省时间。",
+        reasons: [
+          "需求最普遍：几乎每个职场人都想提升效率，但大多数人不会用 AI 工具",
+          "门槛适中：不需要懂编程，也不需要有艺术天赋，愿意折腾工具就能做好",
+          "可迁移性强：AI 效率能力可以用在任何行业，是真正的通用技能"
+        ],
+        path: [
+          { phase: "入门期（第1月）", desc: "掌握 10 个高频 AI 工具，学习用 AI 提升办公效率" },
+          { phase: "进阶期（第2-3月）", desc: "学习 AI 自动化工具，学习工作流设计，把重复工作自动化" },
+          { phase: "变现期（第4-6月）", desc: "做 AI 效率培训，做自媒体分享 AI 效率技巧，提供咨询服务" }
+        ],
+        tools: [
+          { name: "WPS AI", difficulty: "★☆☆☆☆", rating: "⭐⭐⭐⭐⭐" },
+          { name: "飞书 AI", difficulty: "★☆☆☆☆", rating: "⭐⭐⭐⭐" },
+          { name: "影刀 RPA", difficulty: "★★☆☆☆", rating: "⭐⭐⭐⭐⭐" },
+          { name: "Notion AI", difficulty: "★★☆☆☆", rating: "⭐⭐⭐⭐" },
+          { name: "Kimi", difficulty: "★☆☆☆☆", rating: "⭐⭐⭐⭐⭐" }
+        ],
+        tips: [
+          "不要变成工具收集癖，把 5 个工具用到极致比收集 100 个强",
+          "不要为了用 AI 而用 AI，如果手动更快就不要硬上 AI",
+          "要学会分享，自己会用只是第一步，把方法分享出去才能变现"
+        ]
+      },
+      business: {
+        type: "business",
+        emoji: "💰",
+        title: "AI 变现操盘手",
+        subtitle: "用 AI 赚钱的商业天才",
+        color: "#ef4444",
+        bgGradient: "from-red-500 to-orange-500",
+        description: "你对赚钱有天生的敏感度，喜欢发现机会、整合资源、把想法变成钱。你不一定是技术最好的，但你最懂市场、最懂用户、最懂怎么把东西卖出去。在 AI 时代，能把 AI 技术变成钱的人才是真正的赢家。",
+        reasons: [
+          "AI 是最大的风口：AI 正在改变每一个行业，每一个行业都值得用 AI 重做一遍",
+          "变现是你的强项：大多数人学 AI 是为了学技术，而你学 AI 是为了赚钱",
+          "不需要很深的技术：只需要知道什么 AI 能解决什么问题，然后整合资源就行"
+        ],
+        path: [
+          { phase: "入门期（第1月）", desc: "了解主流 AI 工具能做什么，研究 AI 领域的赚钱机会，选定一个方向尝试" },
+          { phase: "进阶期（第2-4月）", desc: "把验证过的模式放大，学习流量获取，学习转化和升单技巧" },
+          { phase: "爆发期（第5-8月）", desc: "打造自己的产品/服务，建立私域流量池，探索可复制的变现模式" }
+        ],
+        tools: [
+          { name: "豆包 / ChatGPT", difficulty: "★☆☆☆☆", rating: "⭐⭐⭐⭐⭐" },
+          { name: "即梦 AI", difficulty: "★★☆☆☆", rating: "⭐⭐⭐⭐" },
+          { name: "剪映 AI", difficulty: "★☆☆☆☆", rating: "⭐⭐⭐⭐⭐" },
+          { name: "企业微信", difficulty: "★☆☆☆☆", rating: "⭐⭐⭐⭐⭐" },
+          { name: "小红书店铺", difficulty: "★☆☆☆☆", rating: "⭐⭐⭐⭐" }
+        ],
+        tips: [
+          "不要什么钱都想赚，选一个方向深耕比到处撒网强",
+          "不要只追风口不落地，想 100 次不如做 1 次",
+          "不要忽视合规风险，注意不要踩红线（数据隐私、虚假宣传等）"
+        ]
+      },
+      all: {
+        type: "all",
+        emoji: "🎯",
+        title: "AI 全能选手",
+        subtitle: "均衡发展的多面手",
+        color: "#8b5cf6",
+        bgGradient: "from-violet-500 to-purple-500",
+        description: "你是一个全面发展的人，各方面能力都不错，没有明显的短板。你学东西快，适应能力强，什么都能上手试试。你不是某一个领域的专家，但你最适合做 AI 产品经理、AI 运营、AI 创业。",
+        reasons: [
+          "你什么都能做：创意、写作、技术、运营、商业……每一样都能上手",
+          "你最适合做整合者：AI 时代最缺的是能把技术、内容、运营、商业整合在一起的人",
+          "你适应能力最强：AI 变化很快，全能型选手能最快切换赛道，永远站在风口上"
+        ],
+        path: [
+          { phase: "探索期（第1月）", desc: "每个方向都试试（绘画、写作、编程、自动化），找到最感兴趣的 1-2 个方向" },
+          { phase: "深耕期（第2-4月）", desc: "选定 1 个主方向 + 1 个副方向深入学习，开始尝试变现" },
+          { phase: "整合期（第5-8月）", desc: "把多个方向的能力整合起来，做更复杂的项目，考虑做自己的产品" }
+        ],
+        tools: [
+          { name: "即梦 AI / Midjourney", difficulty: "★★☆☆☆", rating: "⭐⭐⭐⭐⭐" },
+          { name: "豆包 / ChatGPT", difficulty: "★☆☆☆☆", rating: "⭐⭐⭐⭐⭐" },
+          { name: "Cursor", difficulty: "★★☆☆☆", rating: "⭐⭐⭐⭐" },
+          { name: "影刀 RPA", difficulty: "★★☆☆☆", rating: "⭐⭐⭐⭐" },
+          { name: "Coze 扣子", difficulty: "★★☆☆☆", rating: "⭐⭐⭐⭐" }
+        ],
+        tips: [
+          "不要样样通样样松，一定要有一个主攻方向，做到专业级水平",
+          "不要频繁换方向，选定方向后至少坚持 3 个月",
+          "发挥整合优势，不要跟专家比深度，要跟他们比广度"
+        ]
+      }
+    };
+
+    // ============ 维度名称映射 ============
+    const dimensionLabels = {
+      C: { name: "创造力", emoji: "🎨", color: "#ec4899" },
+      W: { name: "文字力", emoji: "✍️", color: "#f59e0b" },
+      L: { name: "逻辑力", emoji: "💻", color: "#6366f1" },
+      D: { name: "动手力", emoji: "⚙️", color: "#10b981" },
+      B: { name: "商业力", emoji: "💰", color: "#ef4444" },
+      S: { name: "学习力", emoji: "📚", color: "#8b5cf6" }
+    };
+
+    // ============ 状态管理 ============
+    let currentQuestion = 0;
+    let userAnswers = [];
+    let totalScores = { C: 0, W: 0, L: 0, D: 0, B: 0, S: 0 };
+
+    // DOM 元素
+    const screenStart = document.getElementById('screen-start');
+    const screenQuiz = document.getElementById('screen-quiz');
+    const screenResult = document.getElementById('screen-result');
+    const btnStart = document.getElementById('btn-start');
+    const btnPrev = document.getElementById('btn-prev');
+    const btnRestart = document.getElementById('btn-restart');
+    const btnShare = document.getElementById('btn-share');
+    const questionText = document.getElementById('question-text');
+    const optionsContainer = document.getElementById('options-container');
+    const currentNum = document.getElementById('current-num');
+    const progressFill = document.getElementById('progress-fill');
+    const progressPercent = document.getElementById('progress-percent');
+    const progressDots = document.getElementById('progress-dots');
+
+    // 初始化进度点
+    function initProgressDots() {
+      progressDots.innerHTML = '';
+      for (let i = 0; i < 20; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'w-1.5 h-1.5 rounded-full bg-muted transition-all duration-300';
+        progressDots.appendChild(dot);
+      }
+    }
+
+    // 切换屏幕
+    function switchScreen(from, to) {
+      from.classList.add('fade-out');
+      setTimeout(() => {
+        from.classList.add('hidden');
+        from.classList.remove('fade-out');
+        to.classList.remove('hidden');
+        to.classList.add('ai-animate-fadeIn');
+        setTimeout(() => {
+          to.classList.remove('ai-animate-fadeIn');
+        }, 500);
+      }, 300);
+    }
+
+    // 渲染题目
+    function renderQuestion() {
+      const q = questions[currentQuestion];
+      questionText.textContent = q.q;
+      currentNum.textContent = currentQuestion + 1;
+
+      const progress = ((currentQuestion + 1) / questions.length) * 100;
+      progressFill.style.width = progress + '%';
+      progressPercent.textContent = Math.round(progress) + '%';
+
+      // 更新进度点
+      const dots = progressDots.children;
+      for (let i = 0; i < dots.length; i++) {
+        if (i < currentQuestion) {
+          dots[i].className = 'w-1.5 h-1.5 rounded-full bg-primary transition-all duration-300';
+        } else if (i === currentQuestion) {
+          dots[i].className = 'w-2 h-2 rounded-full bg-primary transition-all duration-300';
+        } else {
+          dots[i].className = 'w-1.5 h-1.5 rounded-full bg-muted transition-all duration-300';
+        }
+      }
+
+      // 渲染选项
+      optionsContainer.innerHTML = '';
+      const selectedIndex = userAnswers[currentQuestion];
+
+      q.options.forEach((option, index) => {
+        const optionEl = document.createElement('div');
+        optionEl.className = `option-card ai-card p-4 border-2 border-border ${selectedIndex === index ? 'selected' : ''}`;
+        optionEl.innerHTML = `
+          <div class="flex items-start gap-3">
+            <div class="flex-shrink-0 w-7 h-7 rounded-full bg-muted flex items-center justify-center text-sm font-bold text-muted-foreground option-letter">
+              ${String.fromCharCode(65 + index)}
+            </div>
+            <div class="flex-1 pt-0.5">
+              <p class="text-sm md:text-base font-medium">${option.text}</p>
+            </div>
+          </div>
+        `;
+
+        optionEl.addEventListener('click', () => selectOption(index));
+        optionsContainer.appendChild(optionEl);
+      });
+
+      // 上一题按钮显示/隐藏
+      if (currentQuestion === 0) {
+        btnPrev.classList.add('invisible');
+      } else {
+        btnPrev.classList.remove('invisible');
+      }
+
+      // 添加选项进入动画
+      const optionCards = optionsContainer.querySelectorAll('.option-card');
+      optionCards.forEach((card, i) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(10px)';
+        setTimeout(() => {
+          card.style.transition = 'all 0.3s ease';
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0)';
+        }, 50 + i * 80);
+      });
+    }
+
+    // 选择选项
+    function selectOption(index) {
+      const previousAnswer = userAnswers[currentQuestion];
+
+      // 如果之前有答案，先减去之前的分数
+      if (previousAnswer !== undefined) {
+        const prevScores = questions[currentQuestion].options[previousAnswer].scores;
+        for (let key in prevScores) {
+          totalScores[key] -= prevScores[key];
+        }
+      }
+
+      // 记录新答案
+      userAnswers[currentQuestion] = index;
+      const scores = questions[currentQuestion].options[index].scores;
+      for (let key in scores) {
+        totalScores[key] += scores[key];
+      }
+
+      // 选中效果
+      const optionCards = optionsContainer.querySelectorAll('.option-card');
+      optionCards.forEach((card, i) => {
+        if (i === index) {
+          card.classList.add('selected');
+        } else {
+          card.classList.remove('selected');
+        }
+      });
+
+      // 300ms 后进入下一题
+      setTimeout(() => {
+        if (currentQuestion < questions.length - 1) {
+          currentQuestion++;
+          renderQuestion();
+        } else {
+          showResult();
+        }
+      }, 300);
+    }
+
+    // 上一题
+    function goPrev() {
+      if (currentQuestion > 0) {
+        currentQuestion--;
+        renderQuestion();
+      }
+    }
+
+    // 计算结果
+    function calculateResult() {
+      const dims = ['C', 'W', 'L', 'D', 'B', 'S'];
+      const scoreList = dims.map(d => ({ dim: d, score: totalScores[d] }));
+      scoreList.sort((a, b) => b.score - a.score);
+
+      const highest = scoreList[0];
+      const second = scoreList[1];
+      const lowest = scoreList[5];
+      const total = scoreList.reduce((sum, s) => sum + s.score, 0);
+      const avg = total / 6;
+
+      // 判断全能型：
+      // 1. 学习力最高，且其他维度都不低于平均值的 75%
+      // 2. 各维度分差较小（最高分-最低分 ≤ 总分的 18%，即 ≤ 22 分）
+      const isWellRounded = highest.score - lowest.score <= 22;
+      const allAboveThreshold = scoreList.every(s => s.score >= avg * 0.75);
+
+      if (highest.dim === 'S' && allAboveThreshold) {
+        return 'all';
+      }
+      if (isWellRounded && allAboveThreshold) {
+        return 'all';
+      }
+
+      // D最高且B第二 → business
+      if (highest.dim === 'D' && second.dim === 'B') {
+        return 'business';
+      }
+
+      // S最高但不是全能 → 归为次高维度类型
+      if (highest.dim === 'S') {
+        return getTypeByDim(second.dim);
+      }
+
+      // 根据最高维度判断
+      return getTypeByDim(highest.dim);
+    }
+
+    function getTypeByDim(dim) {
+      switch (dim) {
+        case 'C': return 'creative';
+        case 'W': return 'writing';
+        case 'L': return 'logic';
+        case 'D': return 'doing';
+        case 'B': return 'business';
+        default: return 'all';
+      }
+    }
+
+    // 显示结果
+    function showResult() {
+      const resultType = calculateResult();
+      const result = resultTypes[resultType];
+
+      // 设置结果类型配色（通过 data-type 切换整套配色体系）
+      document.body.setAttribute('data-type', resultType);
+
+      // 更新结果头部
+      document.getElementById('result-emoji').textContent = result.emoji;
+      document.getElementById('result-emoji').classList.add('ai-animate-bounce-in');
+      document.getElementById('result-title').textContent = result.title;
+      document.getElementById('result-subtitle').textContent = result.subtitle;
+
+      const typeLabel = document.getElementById('result-type-label');
+      typeLabel.innerHTML = `
+        <i data-lucide="award" class="w-4 h-4"></i>
+        <span>${result.title}</span>
+      `;
+      typeLabel.style.backgroundColor = result.color + '15';
+      typeLabel.style.color = result.color;
+
+      // 渲染能力条形图
+      const abilityBars = document.getElementById('ability-bars');
+      abilityBars.innerHTML = '';
+      const maxScore = 60; // 20题 × 3分
+
+      Object.keys(dimensionLabels).forEach(dim => {
+        const label = dimensionLabels[dim];
+        const score = totalScores[dim];
+        const percent = Math.round((score / maxScore) * 100);
+
+        const bar = document.createElement('div');
+        bar.className = 'ability-bar';
+        bar.innerHTML = `
+          <div class="flex items-center justify-between mb-1">
+            <div class="flex items-center gap-2">
+              <span class="text-lg">${label.emoji}</span>
+              <span class="text-sm font-medium">${label.name}</span>
+            </div>
+            <span class="text-sm font-bold" style="color: ${label.color}">${percent}%</span>
+          </div>
+          <div class="h-2.5 bg-muted rounded-full overflow-hidden">
+            <div class="bar-fill h-full rounded-full" style="width: 0%; background: ${label.color}"></div>
+          </div>
+        `;
+        abilityBars.appendChild(bar);
+      });
+
+      // 描述
+      document.getElementById('result-description').textContent = result.description;
+
+      // 理由
+      const reasonsList = document.getElementById('result-reasons');
+      reasonsList.innerHTML = '';
+      result.reasons.forEach((reason, i) => {
+        const li = document.createElement('li');
+        li.className = 'flex gap-3 text-sm';
+        li.innerHTML = `
+          <span class="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold text-white" style="background: var(--type-color);">
+            ${i + 1}
+          </span>
+          <span class="text-muted-foreground pt-0.5">${reason}</span>
+        `;
+        reasonsList.appendChild(li);
+      });
+
+      // 学习路径
+      const learningPath = document.getElementById('learning-path');
+      learningPath.innerHTML = '';
+      result.path.forEach((item, i) => {
+        const step = document.createElement('div');
+        step.className = 'relative pl-8';
+        step.innerHTML = `
+          <div class="absolute left-0 top-0 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold text-white" style="background: var(--type-color);">
+            ${i + 1}
+          </div>
+          ${i < result.path.length - 1 ? `<div class="absolute left-3 top-6 w-0.5 h-[calc(100%-0.5rem)]" style="background: var(--type-color-lighter);"></div>` : ''}
+          <h4 class="font-semibold text-sm mb-1">${item.phase}</h4>
+          <p class="text-sm text-muted-foreground">${item.desc}</p>
+        `;
+        learningPath.appendChild(step);
+      });
+
+      // 工具清单
+      const toolsList = document.getElementById('tools-list');
+      toolsList.innerHTML = '';
+      result.tools.forEach(tool => {
+        const toolEl = document.createElement('div');
+        toolEl.className = 'flex items-center justify-between p-3 rounded-xl bg-muted/50';
+        toolEl.innerHTML = `
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg flex items-center justify-center text-lg" style="background: var(--type-color-light);">
+              🛠️
+            </div>
+            <div>
+              <div class="font-semibold text-sm">${tool.name}</div>
+              <div class="text-xs text-muted-foreground">难度：${tool.difficulty}</div>
+            </div>
+          </div>
+          <div class="text-sm">${tool.rating}</div>
+        `;
+        toolsList.appendChild(toolEl);
+      });
+
+      // 避坑指南
+      const tipsList = document.getElementById('tips-list');
+      tipsList.innerHTML = '';
+      result.tips.forEach(tip => {
+        const li = document.createElement('li');
+        li.className = 'flex gap-3 text-sm';
+        li.innerHTML = `
+          <span class="flex-shrink-0 text-amber-500 mt-0.5">⚠️</span>
+          <span class="text-muted-foreground">${tip}</span>
+        `;
+        tipsList.appendChild(li);
+      });
+
+      // 切换到结果页
+      switchScreen(screenQuiz, screenResult);
+
+      // 触发图标重渲染
+      setTimeout(() => {
+        lucide.createIcons();
+        // 延迟触发条形图动画
+        const bars = abilityBars.querySelectorAll('.bar-fill');
+        bars.forEach((bar, i) => {
+          const dim = Object.keys(dimensionLabels)[i];
+          const percent = Math.round((totalScores[dim] / maxScore) * 100);
+          setTimeout(() => {
+            bar.style.width = percent + '%';
+          }, 200 + i * 100);
+        });
+      }, 400);
+    }
+
+    // 重置测试
+    function resetQuiz() {
+      currentQuestion = 0;
+      userAnswers = [];
+      totalScores = { C: 0, W: 0, L: 0, D: 0, B: 0, S: 0 };
+      document.body.removeAttribute('data-type');
+      initProgressDots();
+      switchScreen(screenResult, screenStart);
+    }
+
+    // 分享功能
+    function shareResult() {
+      const resultType = calculateResult();
+      const result = resultTypes[resultType];
+      const text = `我在 AI 天赋测试中测出是「${result.title}」${result.emoji}！你也来测测你最适合学的 AI 技能方向吧～`;
+
+      if (navigator.share) {
+        navigator.share({
+          title: 'AI 天赋测试',
+          text: text,
+          url: window.location.href
+        }).catch(() => {});
+      } else {
+        // 复制到剪贴板
+        navigator.clipboard.writeText(text + ' ' + window.location.href).then(() => {
+          const btn = document.getElementById('btn-share');
+          const originalText = btn.innerHTML;
+          btn.innerHTML = '<i data-lucide="check" class="w-5 h-5"></i> 已复制';
+          lucide.createIcons();
+          setTimeout(() => {
+            btn.innerHTML = originalText;
+            lucide.createIcons();
+          }, 2000);
+        }).catch(() => {
+          alert('复制失败，请手动分享');
+        });
+      }
+    }
+
+    // ============ 事件绑定 ============
+    btnStart.addEventListener('click', () => {
+      initProgressDots();
+      switchScreen(screenStart, screenQuiz);
+      renderQuestion();
+      lucide.createIcons();
+    });
+
+    btnPrev.addEventListener('click', goPrev);
+    btnRestart.addEventListener('click', resetQuiz);
+    btnShare.addEventListener('click', shareResult);
+
+    // 初始化 Lucide 图标
+    lucide.createIcons();
+    </script>
+</body>
+</html>
